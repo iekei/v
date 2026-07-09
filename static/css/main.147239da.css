@@ -1,2 +1,179 @@
 @import url(https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;700&display=swap);body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;background-color:#0f1a26;padding-left:150px;padding-right:150px}.Filter,body{color:#cececf;font-family:Signika Negative,sans-serif}.Filter{background-color:#1f2933;border-radius:25px;cursor:default;margin-top:100px;padding:10px 30px}.Filter:after{clear:both;content:"";display:table}.Filter-h1{color:#bfbfbf;font-size:15px;font-weight:700;margin-bottom:24px}.left-side-filter{float:left;margin-right:3%;width:17%}.right-side-filter{float:right;width:80%}.container{display:flex;flex-direction:row;justify-content:flex-start}.left-side{margin-right:30px}.left-side,.right-side{display:flex;flex-direction:column}.MapList{font-size:18px}.Map{border-radius:6px;margin:.2em 0;padding:.7em 1em;position:relative}.Map:hover{background-color:#313b45;cursor:pointer}.Map-active{background-color:#fe4655!important;border-radius:6px;outline:5px solid #1f2933;outline-offset:-7px;padding:.7em 1em;position:relative}.Agent{display:inline-block;margin-bottom:21px;margin-right:15px;position:relative}.Agent:hover{outline:4px solid #313b45}.Agent-active,.Agent:hover{border-radius:6px;cursor:pointer}.Agent-active{outline:4px solid #fe4655!important}.ListEl{-webkit-margin-before:0;-webkit-margin-after:0;-webkit-margin-start:0;-webkit-margin-end:0;-webkit-padding-start:0;border-radius:10px;display:inline-block;list-style:none;margin-block-end:0;margin-block-start:0;margin-inline-end:0;margin-inline-start:0;margin-right:10px;padding-inline-start:0;padding:10px 8px;text-align:center;width:70px}.ListEl:hover{background-color:#313b45}.ListEl-selected{background-color:#fe4655!important;border-radius:6px;color:#fff!important;cursor:pointer;outline:4px solid #1f2933;outline-offset:-7px;position:relative}.Ability{display:inline-block;margin-bottom:21px;margin-right:15px;position:relative}.Ability:hover{outline:4px solid #313b45}.Ability-active,.Ability:hover{border-radius:6px;cursor:pointer}.Ability-active{outline:4px solid #fe4655!important}.Abilities-h1{color:#bfbfbf;font-size:15px;font-weight:700;margin-bottom:24px}.ListElFav{-webkit-margin-before:0;-webkit-margin-after:0;-webkit-margin-start:0;-webkit-margin-end:0;-webkit-padding-start:0;border-radius:10px;display:inline-block;list-style:none;margin-block-end:0;margin-block-start:0;margin-inline-end:0;margin-inline-start:0;margin-right:10px;padding-inline-start:0;padding:10px 8px;text-align:center;width:130px}.ListElFav:hover{background-color:#313b45}.ListElFav-selected{background-color:#fe4655!important;border-radius:6px;color:#fff!important;cursor:pointer;outline:4px solid #1f2933;outline-offset:-7px;position:relative}#popupWrapper{cursor:pointer;height:100%;left:0;position:fixed;top:0;width:100%}#popup{background-color:#1f2933;border-radius:10px;cursor:default;height:90%;left:5%;position:fixed;top:5%;width:90%}.popupClose{cursor:pointer;position:absolute;right:15px;top:15px;width:40px}.videoFrame{bottom:10px;height:inherit;position:absolute;width:100%;z-index:-1}.videoTitle{padding-left:30px}.Results-Block{align-items:center;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;margin:0;width:100%}.imgBlocks{flex:0 0 32%;margin:10px 0 30px;position:relative;width:33%}.imgBlocks,.imgPreviewBlock{border-radius:10px;display:inline-block;vertical-align:top}.imgPreviewBlock{aspect-ratio:16/9;cursor:pointer;width:100%}.imgBlocksBottom{border-radius:0 0 10px 10px;bottom:-20px;padding:10px 5px;width:calc(100% - 10px)}.imgBlocksBottom,.lineup-ability{background-color:#1f2933;position:absolute}.lineup-ability{border:2px solid #000;border-radius:44px;height:44px;padding:2px;right:10px;top:10px;width:44px}.lineup-title{margin-left:5px}.bookmark-icon{cursor:pointer;float:right;margin-right:5px;width:15px}
+/* カラー変数の定義（ライトモードがデフォルト） */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --sidebar-bg: #f4f4f4;
+  --sidebar-text: #333333;
+  --sidebar-hover: #ddd;
+  --toggle-btn-bg: #333333;
+  --toggle-btn-text: #ffffff;
+}
+
+/* ダークモードのカラー定義 */
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --sidebar-bg: #1e1e1e;
+  --sidebar-text: #ffffff;
+  --sidebar-hover: #333333;
+  --toggle-btn-bg: #ffffff;
+  --toggle-btn-text: #121212;
+}
+
+/* サイト全体のスタイル適用 */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+  font-family: sans-serif;
+  margin: 0;
+}
+
+#main-content {
+  padding: 20px;
+  transition: margin-left 0.3s;
+}
+
+/* メニューを開くボタン */
+.menu-toggle-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  background: var(--toggle-btn-bg);
+  color: var(--toggle-btn-text);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 999;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* サイドバー本体 */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px; /* 最初は画面外に隠す */
+  width: 260px;
+  height: 100%;
+  background-color: var(--sidebar-bg);
+  box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+  transition: left 0.3s ease;
+  z-index: 1000;
+  padding-top: 60px;
+  box-sizing: border-box;
+}
+
+/* サイドバーが表示されている時のクラス */
+.sidebar.active {
+  left: 0;
+}
+
+/* 閉じるボタン */
+.menu-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  color: var(--sidebar-text);
+  cursor: pointer;
+}
+
+/* メニューリンクのスタイル */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li a {
+  display: flex;
+  justify-content: space-between; /* テキストとアイコンを両端に離す */
+  align-items: center;
+  padding: 15px 25px;
+  color: var(--sidebar-text);
+  text-decoration: none;
+  font-size: 18px;
+  transition: background 0.2s;
+}
+
+.sidebar-menu li a:hover {
+  background-color: var(--sidebar-hover);
+}
+
+/* アイコンを右側に配置するマージン */
+.icon-right {
+  margin-left: 10px;
+}
+
+/* ダークモードスイッチのスタイル */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 25px;
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  border-top: 1px solid var(--sidebar-hover);
+}
+
+.theme-text {
+  color: var(--sidebar-text);
+  font-size: 16px;
+}
+
+.theme-switch {
+  display: inline-block;
+  height: 24px;
+  position: relative;
+  width: 48px;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 3px;
+  content: "";
+  height: 18px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 18px;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 /*# sourceMappingURL=main.147239da.css.map*/
